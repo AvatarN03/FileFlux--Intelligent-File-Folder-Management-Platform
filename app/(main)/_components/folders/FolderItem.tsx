@@ -7,8 +7,8 @@ import  MobileFolderMenu  from "./MobileFolderMenu";
 
 import  ItemNameDisplay  from "../shared/ItemNameDisplay";
 
-import { FolderItemRowProps } from "@/types/file";
 import { formatFileSize } from "@/lib/file/fileFunctions";
+import { FolderItemRowProps } from "@/types/ui";
 
 
 

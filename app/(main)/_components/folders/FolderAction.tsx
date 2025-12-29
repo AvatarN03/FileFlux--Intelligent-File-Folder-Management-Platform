@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Edit, FolderInput, Trash2, Eye } from "lucide-react";
 
 import  ActionButton  from "../shared/ActionButton";
+import { FolderActionsProps } from "@/types/ui";
 
-import { FolderActionsProps } from "@/types/file";
 
 
 

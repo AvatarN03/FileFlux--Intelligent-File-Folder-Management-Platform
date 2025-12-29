@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import { Plus } from "lucide-react";
+import { FolderListHeaderProps } from "@/types/ui";
 
-import { FolderListHeaderProps } from "@/types/file";
 
 
 

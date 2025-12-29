@@ -1,6 +1,6 @@
 import { Edit, FolderInput, Trash2 } from "lucide-react";
 import  MobileActionMenu  from "../shared/MobileActionMenu";
-import { MobileFolderMenuProps } from "@/types/file";
+import { MobileFolderMenuProps } from "@/types/ui";
 
 const MobileFolderMenu = ({
   onEdit,
