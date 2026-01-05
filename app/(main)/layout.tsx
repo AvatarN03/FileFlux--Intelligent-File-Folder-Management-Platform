@@ -10,8 +10,10 @@ import Header from "./_components/Header";
 import FileUpload from "./_components/FileUpload";
 import Storage from "./_components/Storage";
 
+import Loading from "../_uiParts/Loading";
+
 import useAuthStore from "@/context/useAuthStore";
-import Logo from "./_components/Logo";
+
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const { user, isLoading, checkAuth } = useAuthStore();
@@ -34,15 +36,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
   if (isLoading) {
     return (
-      <div className="h-screen flex flex-col gap-8 items-center justify-center bg-violet text-peach">
-        <div className="bg-green w-fit p-3 rounded-md">
-          <Logo />
-        </div>
-        <div className="w-14 h-14 border-4 border-peach border-t-ember rounded-full animate-spin"></div>
-        <p className="mt-4 text-sm md:text-3xl tracking-wide text-peach/80">
-          Loading your workspace...
-        </p>
-      </div>
+      <Loading />
     );
   }
 

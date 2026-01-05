@@ -31,15 +31,32 @@ const FolderItemRow = ({
       {/* Desktop Layout */}
       <div className="hidden lg:grid lg:grid-cols-12 lg:gap-4 lg:items-center">
         <div className="col-span-4">
-          <ItemNameDisplay
-            name={folder.name}
-            icon={<FolderIcon className="stroke-3 w-8 h-8" />}
-            isEditing={isEditing}
-            editName={editName}
-            onEditChange={onEditChange}
-            onBlur={onEditBlur}
-            onKeyDown={onEditKeyDown}
-          />
+          {isEditing ? (
+            <ItemNameDisplay
+              name={folder.name}
+              icon={<FolderIcon className="stroke-3 w-8 h-8" />}
+              isEditing={isEditing}
+              editName={editName}
+              onEditChange={onEditChange}
+              onBlur={onEditBlur}
+              onKeyDown={onEditKeyDown}
+            />
+          ) : (
+            <Link
+              href={`/folders/${folder.id}`}
+              className="flex items-center gap-3 px-4 py-3 hover:bg-brown/10 font-medium rounded-t-lg"
+            >
+              <ItemNameDisplay
+                name={folder.name}
+                icon={<FolderIcon className="stroke-3 w-8 h-8" />}
+                isEditing={isEditing}
+                editName={editName}
+                onEditChange={onEditChange}
+                onBlur={onEditBlur}
+                onKeyDown={onEditKeyDown}
+              />
+            </Link>
+          )}
         </div>
 
         <div className="col-span-2">

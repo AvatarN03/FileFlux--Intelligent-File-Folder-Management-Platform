@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Loader } from "lucide-react";
+import {  Loader2 } from "lucide-react";
 
 import  useFileStore from "@/context/useFileStore";
 
@@ -23,7 +23,7 @@ const Storage = () => {
   if (isLoading)
     return (
       <div className="flex justify-center items-center w-full h-full">
-        <Loader className="animate-spin" />
+        <Loader2 className="animate-spin" />
       </div>
     );
 

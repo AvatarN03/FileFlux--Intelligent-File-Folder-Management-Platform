@@ -58,6 +58,7 @@ const Header = () => {
                   <p className="text-violet/70 text-sm font-bold">
                     {user.email}
                   </p>
+                  <p>{user.createdAt}</p>
                 </div>
                 <div className="flex items-center gap-3 justify-between">
                   <button

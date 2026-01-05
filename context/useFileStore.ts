@@ -255,12 +255,38 @@ const useFileStore = create<FileState>()(
 
           const updatedFolder = res.data.folder;
 
+          // Update the moved folder and remove all its descendants from the current folders state
           set(
-            (state) => ({
-              folders: state.folders.map((folder) =>
-                folder.id === folderId ? updatedFolder : folder
-              ),
-            }),
+            (state) => {
+              // build parent map from current state to find descendants
+              const childrenMap = new Map<number | null, typeof state.folders>();
+              state.folders.forEach((f) => {
+                const key = f.parentId ?? null;
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                if (!childrenMap.has(key)) childrenMap.set(key, [] as any);
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (childrenMap.get(key) as any).push(f);
+              });
+
+              const descendantIds = new Set<number>();
+              const stack = [folderId];
+              while (stack.length) {
+                const current = stack.pop() as number;
+                const children = childrenMap.get(current) ?? [];
+                for (const c of children) {
+                  if (!descendantIds.has(c.id)) {
+                    descendantIds.add(c.id);
+                    stack.push(c.id);
+                  }
+                }
+              }
+
+              return {
+                folders: state.folders
+                  .map((folder) => (folder.id === folderId ? updatedFolder : folder))
+                  .filter((folder) => !descendantIds.has(folder.id)),
+              };
+            },
             false,
             "moveFolder"
           );

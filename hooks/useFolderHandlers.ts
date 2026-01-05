@@ -53,8 +53,34 @@ export const useFolderHandlers = ({
 
     const folders = await getAllFolders();
     let filtered = folders;
+
     if (folderId) {
-      filtered = folders.filter((f) => f.id !== folderId);
+      // build map parentId -> children
+      const childrenMap = new Map<number | null, { id: number; parentId: number | null }[]>();
+      folders.forEach((f) => {
+        const key = f.parentId ?? null;
+        if (!childrenMap.has(key)) childrenMap.set(key, []);
+        // store minimal shape
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (childrenMap.get(key) as any).push({ id: f.id, parentId: f.parentId });
+      });
+
+      // find all descendants of folderId
+      const descendantIds = new Set<number>();
+      const stack = [folderId];
+      while (stack.length) {
+        const current = stack.pop()!;
+        const children = childrenMap.get(current) ?? [];
+        for (const c of children) {
+          if (!descendantIds.has(c.id)) {
+            descendantIds.add(c.id);
+            stack.push(c.id);
+          }
+        }
+      }
+
+      // filter out the folder itself and all its descendants to prevent moving into them
+      filtered = folders.filter((f) => f.id !== folderId && !descendantIds.has(f.id));
     }
 
     setMoveFolders(filtered);

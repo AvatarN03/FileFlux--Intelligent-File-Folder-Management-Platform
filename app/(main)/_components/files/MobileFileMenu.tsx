@@ -18,35 +18,35 @@ const MobileFileMenu = ({
   return (
      <MobileActionMenu onClose={onClose}>
           <button
-            onClick={onView}
+            onClick={() => { onView(); onClose(); }}
             className="w-full flex items-center gap-3 p-3 hover:bg-brown/10 text-violet font-medium border-b border-brown/20 rounded-t-lg"
           >
             <Eye className="w-5 h-5" />
             <span>View</span>
           </button>
           <button
-            onClick={onDownload}
+            onClick={() => { onDownload(); onClose(); }}
             className="w-full flex items-center gap-3 p-3 hover:bg-brown/10 text-violet font-medium border-b border-brown/20"
           >
             <Download className="w-5 h-5" />
             <span>Download</span>
           </button>
           <button
-            onClick={onEdit}
+            onClick={() => { onEdit(); onClose(); }}
             className="w-full flex items-center gap-3 p-3 hover:bg-brown/10 text-ember border-b border-brown/20"
           >
             <Edit className="w-5 h-5" />
             <span>Edit Name</span>
           </button>
           <button
-            onClick={onMove}
+            onClick={() => { onMove(); onClose(); }}
             className="w-full flex items-center gap-3 p-3 hover:bg-brown/10 text-ember border-b border-brown/20"
           >
             <FolderInput className="w-5 h-5" />
             <span>Move File</span>
           </button>
           <button
-            onClick={onDelete}
+            onClick={() => { onDelete(); onClose(); }}
             className="w-full flex items-center gap-3 p-3 hover:bg-brown/10 text-red-600 rounded-b-lg"
           >
             <Trash2 className="w-5 h-5" />

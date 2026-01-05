@@ -25,7 +25,7 @@ const ItemNameDisplay = ({
         onChange={(e) => onEditChange(e.target.value)}
         onBlur={onBlur}
         onKeyDown={onKeyDown}
-        className="w-full px-2 py-1 rounded border border-violet bg-peach text-violet focus:outline-none focus:ring-2 focus:ring-violet"
+        className="w-full px-2 py-1 rounded border border-violet bg-peach! text-violet focus:outline-none focus:ring-2 focus:ring-violet"
       />
     );
   }

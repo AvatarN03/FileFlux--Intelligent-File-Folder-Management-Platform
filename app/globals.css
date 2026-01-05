@@ -64,7 +64,7 @@
   .gradient-logo {
   background: linear-gradient(
     120deg,
-    var(--color-violet),
+    #000,
     var(--color-ember)
   );
   -webkit-background-clip: text;

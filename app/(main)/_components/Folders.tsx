@@ -19,6 +19,32 @@ const Folders = ({ folderId, limit }: { folderId?: number; limit?: number }) => 
   const [editName, setEditName] = useState("");
 
   const { fetchFolders, folders } = useFileStore();
+  const [folderPath, setFolderPath] = useState<{ id: number; name: string }[] | undefined>(undefined);
+
+  useEffect(() => {
+    if (!folderId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setFolderPath(undefined);
+      return;
+    }
+
+    let mounted = true;
+
+    (async () => {
+      try {
+        const res = await fetch(`/api/folders/path?folderId=${folderId}`);
+        const data = await res.json();
+        if (!mounted) return;
+        setFolderPath(data.path ?? []);
+      } catch {
+        setFolderPath(undefined);
+      }
+    })();
+
+    return () => {
+      mounted = false;
+    };
+  }, [folderId]);
 
   const {
     moveFolders,
@@ -49,7 +75,7 @@ const Folders = ({ folderId, limit }: { folderId?: number; limit?: number }) => 
   return (
     <div>
       <div className="bg-ember h-full w-full p-3 text-peach rounded-md flex flex-col gap-2">
-        <FolderListHeader onAddClick={() => setOpenModel((prev) => !prev)} />
+        <FolderListHeader onAddClick={() => setOpenModel((prev) => !prev)} folderPath={folderPath} />
 
         <div className="my-4">
           {folders.length === 0 ? (

@@ -117,6 +117,8 @@ export interface MobileFolderMenuProps {
 
 export interface FolderListHeaderProps {
   onAddClick: VoidFn;
+  folderName?: string;
+  folderPath?: PathNode[];
 }
 
 export interface FolderItemRowProps {

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "FileFlux - FileUploader Platform",
   description: "The ultimate file uploader platform.",
   icons:{
-    icon:"logo.svg"
+    icon:"logo.png"
   }
 };
 
