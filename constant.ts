@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import { FeatureType } from "./types/ui";
+import { UploadState } from "./types/file";
 
 export const navLinks = [
   {
@@ -136,6 +137,16 @@ export const PRICING_PLANS = [
     },
   },
 ];
+
+export const INITIAL_STATE: UploadState = {
+  file: null,
+  fileName: "",
+  isEditingFileName: false,
+  isDragging: false,
+  isUploading: false,
+  uploadProgress: 0,
+  uploadComplete: false,
+};
 
 
 export const API_ENDPOINTS = {

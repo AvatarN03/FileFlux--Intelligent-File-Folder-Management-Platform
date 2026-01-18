@@ -13,17 +13,10 @@ import createRenamedFile from "@/lib/file/createRenamedFile";
 import UploadArea from "./files/UploadArea";
 import FilePreview from "./files/FilePreview";
 import { UploadState } from "@/types/ui";
-import { API_ENDPOINTS } from "@/constant";
+import { API_ENDPOINTS, INITIAL_STATE } from "@/constant";
+import Link from "next/link";
 
-const INITIAL_STATE: UploadState = {
-  file: null,
-  fileName: "",
-  isEditingFileName: false,
-  isDragging: false,
-  isUploading: false,
-  uploadProgress: 0,
-  uploadComplete: false,
-};
+
 
 const FileUpload = () => {
   const fileRef = useRef<HTMLInputElement>(null);
@@ -177,6 +170,15 @@ const FileUpload = () => {
   return (
     <div className="max-w-92 w-full mx-auto h-auto rounded-xl p-2 md:p-3 bg-ember">
       <div className="w-full rounded-xl p-3 bg-peach">
+      
+      <div className="bg-violet rounded-md w-full min-h-12 p-2 text-center text-peach">
+        <h4>The Upload Functionality is paused due to free tier limitations</h4>
+        <Link href="https://youtu.be/W5v5CXdyn74" target="_blank" className="underline font-semibold mt-1 block text-brown hover:text-ember">
+          Demo Video
+        </Link>
+      </div>
+
+
         <h1 className="text-violet text-center text-xl md:text-2xl my-2 font-medium border-b-violet border-b-2 max-w-64 shadow-xl mx-auto">
           Upload
         </h1>

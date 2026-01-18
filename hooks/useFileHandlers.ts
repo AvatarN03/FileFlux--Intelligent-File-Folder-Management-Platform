@@ -56,21 +56,55 @@ const useFileHandlers = ({
     }
   };
 
-  const handleView = async (file: FileItem) => {
-    try {
-      const res = await fetch(file.file_url);
-      const blob = await res.blob();
-      const blobUrl = URL.createObjectURL(blob);
+const handleView = async (file: FileItem) => {
+  try {
+    const url = file.file_url;
+    const name = file.file_name.toLowerCase();
 
-      window.open(blobUrl, "_blank");
-
-      setTimeout(() => {
-        URL.revokeObjectURL(blobUrl);
-      }, 5000);
-    } catch (err) {
-      console.error("View failed", err);
+    /* ---------- DOC / DOCX ---------- */
+    if (name.endsWith(".doc") || name.endsWith(".docx")) {
+      const gview = `https://docs.google.com/gview?url=${encodeURIComponent(
+        url
+      )}&embedded=true`;
+      window.open(gview, "_blank");
+      return;
     }
-  };
+
+    /* ---------- PDF (Cloudinary RAW FIX) ---------- */
+    if (name.endsWith(".pdf")) {
+      const res = await fetch(url);
+      const blob = await res.blob();
+
+      const pdfBlob = new Blob([blob], { type: "application/pdf" });
+      const blobUrl = URL.createObjectURL(pdfBlob);
+
+      const newTab = window.open();
+      if (newTab) {
+        newTab.location.href = blobUrl;
+      }
+
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+      return;
+    }
+
+    /* ---------- Images / Videos ---------- */
+    const res = await fetch(url);
+    const blob = await res.blob();
+
+    const blobUrl = URL.createObjectURL(blob);
+    const newTab = window.open();
+    if (newTab) {
+      newTab.location.href = blobUrl;
+    }
+
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+  } catch (err) {
+    console.error("View failed", err);
+  }
+};
+
+
+
 
   const handleMoveClick = async (fileId: number) => {
     setMovingFileId(fileId);

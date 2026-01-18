@@ -35,7 +35,7 @@ const FilePreview = ({
             />
           ) : (
             <div className="w-full">
-              <p className="truncate font-medium" title={fileName + extension}>
+              <p className="truncate font-medium " title={fileName + extension}>
                 {fileName}
                 {extension}
               </p>
@@ -71,7 +71,7 @@ const FilePreview = ({
           )}
         </div>
 
-        <p className="text-xs mt-2 text-violet">
+        <p title={file.type || "Unknown type"} className="text-xs mt-2 text-violet text-ellipsis w-full line-clamp-2">
           {file.type || "Unknown type"} · {formatFileSize(file.size)}
         </p>
       </div>
